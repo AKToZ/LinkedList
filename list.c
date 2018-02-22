@@ -23,10 +23,8 @@ void del(list **head,int d){
         last=p;
         p=p->next;
     }
-    if(last==NULL){
+    if(last==NULL)
         *head=p->next;
-        
-    }
     else
         last->next=p->next;
     free(p);
