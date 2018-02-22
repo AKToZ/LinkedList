@@ -16,18 +16,18 @@ void insert(list *head,int d){
         head->next=t;
     }
 }
-void del(list **head,int d){
-    list *p,*last=NULL;
-    p=*head;
-    while(p->data!=d){
-        last=p;
-        p=p->next;
+list * del(list *curr,int d){
+    if (curr==NULL)
+        return NULL;
+    
+    if(curr->data==d){
+        list *p=curr->next;
+        free(curr);
+        return p;
     }
-    if(last==NULL)
-        *head=p->next;
-    else
-        last->next=p->next;
-    free(p);
+    curr->next=del(curr->next,d);
+    
+    
 }
 
 void print(list *head){
@@ -49,7 +49,7 @@ int main()
     insert(head,5);
     insert(head,6);
 
-    del(&head,3);
+    head=del(head,2);
     print(head);
     return 0;
 }
